@@ -5,7 +5,7 @@
 
 int main() {
 
-	int lotto77[5][7] = {0,0}; //5번 x  7개의 숫자 출력
+	int lotto77[5][7] = { NULL, NULL }; //5번 x  7개의 숫자 출력
 
 	//변수 생성
 	int temp;  // 중복 확인용
@@ -13,33 +13,35 @@ int main() {
 
 
 	//난수 생성을 위한 시간 함수 , seed값 초기화
-	srand((unsigned int)time(NULL));   // int a = rand() 변수 생성
+	srand((unsigned int)time(NULL));
 
 	//로또 번호 생성
 	for (int i = 0; i < 5; i++) {
 		for (int j = 0; j < 7; j++) {
 			lotto77[i][j] = (rand() % 45) + 1;
-			
+
 			// 중복제거
-			for (temp = 0; temp < j; temp++) {				
+			for (temp = 0; temp < j; temp++) {
 				if (lotto77[i][j] == lotto77[i][temp]) {
-					i--;
-				}  //중복제거 부분에서 계속  run-time check failure #2 - stack around the variable 나옴 //없애면 안뜸 // 코드에 문제 있는듯
+					j--;
+				}
 			}
 		}
 	}
 
 	//버블정렬
+	//0 ~ 6사이만 정렬 0 < 6
 
 
 	//5줄 7개 출력
 	for (int k = 0; k < 5; k++) {
-		for (int l = 0; l < 7; l++) {
+		for (int l = 0; l < 6; l++) {
 			printf("%4d ", lotto77[k][l]);
 		}
+		printf("  보너스 번호 : %3d", lotto77[k][6]);
 		printf("\n");
 	}
-	
+
 
 	return 0;
 }
