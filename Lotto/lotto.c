@@ -9,7 +9,7 @@ int main() {
 
 	//변수 생성
 	int temp;  // 중복 확인용
-	int stemp; // 정렬 확인용
+	int stemp = 0; // 정렬 확인용
 
 
 	//난수 생성을 위한 시간 함수 , seed값 초기화
@@ -31,7 +31,23 @@ int main() {
 
 	//버블정렬
 	//0 ~ 6사이만 정렬 0 < 6
+	// 마지막부터 i를 1씩 감소, 처음 배열의 i-1까지
+	for (int k = 0; k < 5; k++) {
+		for (int i = 5; i >= 0; i--) {
+			for (int j = 0; j < i; j++) {
+				if (lotto77[k][i] < lotto77[k][j]) {
+					stemp = lotto77[k][i];
+					lotto77[k][i] = lotto77[k][j];
+					lotto77[k][j] = stemp;
+				}
+			}
+		}
+	}
 
+	// 3번호 연속 되면  
+	// count를 세어서 count = 2가 되면 
+	// 다시 돌리도록 만든다 / 그렇게 할라면 함수로 (정렬), (랜덤생성)을 함수로 만들어야함
+	// 
 
 	//5줄 7개 출력
 	for (int k = 0; k < 5; k++) {
