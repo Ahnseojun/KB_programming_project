@@ -32,13 +32,13 @@ int main() {
 	//버블정렬
 	//0 ~ 6사이만 정렬 0 < 6
 	// 마지막부터 i를 1씩 감소, 처음 배열의 i-1까지
-	for (int k = 0; k < 5; k++) {
-		for (int i = 5; i >= 0; i--) {
-			for (int j = 0; j < i; j++) {
-				if (lotto77[k][i] < lotto77[k][j]) {
-					stemp = lotto77[k][i];
-					lotto77[k][i] = lotto77[k][j];
-					lotto77[k][j] = stemp;
+	for (int i = 0; i < 5; i++) {
+		for (int j = 5; j >= 0; j--) {
+			for (int k = 0; k < j; k++) {
+				if (lotto77[i][j] < lotto77[i][k]) {
+					stemp = lotto77[i][j];
+					lotto77[i][j] = lotto77[i][k];
+					lotto77[i][k] = stemp;
 				}
 			}
 		}
@@ -50,11 +50,11 @@ int main() {
 	// 
 
 	//5줄 7개 출력
-	for (int k = 0; k < 5; k++) {
-		for (int l = 0; l < 6; l++) {
-			printf("%4d ", lotto77[k][l]);
+	for (int i = 0; i < 5; i++) {
+		for (int j = 0; j < 6; j++) {
+			printf("%4d ", lotto77[i][j]);
 		}
-		printf("  보너스 번호 : %3d", lotto77[k][6]);
+		printf("  보너스 번호 : %3d", lotto77[i][6]);
 		printf("\n");
 	}
 
