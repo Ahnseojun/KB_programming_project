@@ -6,6 +6,7 @@
 
 #define SIZE_X 12
 #define SIZE_Y 24
+
 int board[SIZE_Y][SIZE_X]; //board[높이][넓이] 배열
 
 #define block_X 4
@@ -249,7 +250,7 @@ void start_Board() {
 }
 
 
-// 메인 보드
+// 메인 보드 = PrintGameBoard(); //게임판을 출력
 void print_Board() {
     for (int y = 0; y < SIZE_Y; y++)
     {
@@ -258,28 +259,28 @@ void print_Board() {
             switch (board[y][x])
             {
             case EMPTY: // 해당칸이 빈공간이면
-                GotoXY(x+5, y);
+                GotoXY(x, y);
                 printf("  "); // 스페이바 두번
                 break;
 
             case MOVE_BLOCK: // 해당칸이 움직이는 블록이면
-                GotoXY(x+5, y);
+                GotoXY(x, y);
                 printf("■");
                 break;
 
             case OVERLINE: // 해당칸이 게임 오버라인이면
-                GotoXY(x+5, y);
+                GotoXY(x, y);
                 printf("_");
                 break;
 
             case WALL: // 해당칸이 벽이면
-                GotoXY(x+5, y);
+                GotoXY(x, y);
                 //textcolor(14);
                 printf("▩");
                 break;
 
             case FIX_BLOCK: // 해당칸이 고정된 블록이면
-                GotoXY(x+5, y);
+                GotoXY(x, y);
                 printf("■");
                 break;
             }
@@ -331,19 +332,46 @@ void NewBlockMaker() // 새로운 블록을 맵에 생성
     }
 }
 
+void BlockMove(int inputX, int inputY) // 블록을 이동 및 회전시킵니다.
+{
+    block_X + inputX; //입력받은 값 만큼 X값 이동
+    block_Y + inputY; //입력받은 값 만큼 Y값 이동
+
+    for (int y = 0; y < 4; y++) // 원래 있던 값 지우기
+    {
+        for (int x = 0; x < 4; x++)
+        {
+            if (blocks[block_type][block_rotation][y][x] == 1)
+                board[block_Y + y][block_X + x] = EMPTY;
+        }
+    }
+
+    for (int y = 0; y < 4; y++) // 다시 값 넣기
+    {
+        for (int x = 0; x < 4; x++)
+        {
+            if (blocks[block_type][block_rotation][y][x] == 1)
+                board[block_Y + y + inputY][block_X + x + inputX] = MOVE_BLOCK;
+        }
+    }
+}
+
+
+
+
 
 int main() {
-    SetConsole(); //콘솔창 세팅
     srand((unsigned)time(NULL));
+    SetConsole(); //콘솔창 세팅
 
     //while (1) { }
     start_Board();      // 보드 초기화
-    print_Next_Board(); // 넥스트 보드(우측)
+    print_Next_Board(); // 넥스트 보드(우측블럭)
+
     NewBlockMaker();    // <-- 블록 추가
-    print_Board();      // 메인 보드(좌측)
+
+    print_Board();      // 메인 보드(좌측블럭)
     
-
-
 
 	return 0;
 }
