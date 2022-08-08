@@ -192,21 +192,21 @@ int BlockShape[7][4][4][4] = {
 		// T 블록
 		{
 			{0, 0, 0, 0},
-			{0, 1, 0, 0},
-			{1, 1, 1, 0},
-			{0, 0, 0, 0}
-		},
-		{
-			{0, 1, 0, 0},
-			{0, 1, 1, 0},
-			{0, 1, 0, 0},
+			{0, 0, 1, 0},
+			{0, 1, 1, 1},
 			{0, 0, 0, 0}
 		},
 		{
 			{0, 0, 0, 0},
-			{0, 1, 1, 1},
 			{0, 0, 1, 0},
-			{0, 0, 0, 0}
+			{0, 0, 1, 1},
+			{0, 0, 1, 0}
+		},
+		{
+			{0, 0, 0, 0},
+			{0, 0, 0, 0},
+			{0, 1, 1, 1},
+			{0, 0, 1, 0}
 		},
 		{
 			{0, 0, 0, 0},
@@ -232,8 +232,6 @@ int score = 0;
 int flagCrush;
 int shuffleBlock[7];
 int cnt;
-int clearNum = 0;
-
 
 void GotoXY(int, int);
 void SetConsole();
@@ -241,31 +239,28 @@ void ConsoleSize();
 void RemoveCurser();
 void RemoveScrollbar();
 void TextColor(int);
-
 void StartScreen();
 void StopScreen();
 void EndScreen();
-
 void ResetGameBoard();
 void ResetCopyGameBoard();
 void PrintGameBoard();
 void PrintGameBoardAll();
 void PrintNextBoard();
 void PrintScore();
-
 void Keyboard();
 void BlockShuffler();
 int BlockSelector();
 void NewBlock();
 void PrintNextBlock();
-
 int CrushCheck(int, int, int);
 void FixBlock();
-void LineClean();
+void CleanLine();
+void Level();
 void GameOverCheck();
-
+void PrintGameOver();
 void Move(int, int, int);
-
+void Drop();
 
 void main() {
 	cnt = 7;
@@ -283,16 +278,13 @@ void main() {
 		if (flagNewBlock == 1)
 			NewBlock();
 
-		if (CrushCheck(0, 1, 0) == FALSE) {
-			FixBlock();
-			LineClean();
-			GameOverCheck();
-		}
-		else
-			Move(0, 1, 0);
+		Sleep(150 - speed);
+		Drop();
+		CleanLine();
+		Level();
+		GameOverCheck();
 		PrintGameBoard();
 		PrintScore();
-		Sleep(150 - speed);
 	}
 }
 
@@ -346,14 +338,16 @@ void TextColor(int colorNum) {
 // 시작화면
 void StartScreen() {
 	TextColor(15);
-	GotoXY(0, 8);
+	GotoXY(0, 7);
 	printf("         * * *  T E T R I S  * * *\n\n"); //시작화면 출력
 	printf("          ◁ ▷ ▽  : 이동\n");
 	printf("             △     : 회전\n");
 	printf("             Z      : 역회전\n");
+	printf("             C      : 블록 저장 및 교체\n");
 	printf("           Space    : 낙하\n");
 	printf("             P      : 일시정지\n");
 	printf("            ESC     : 게임 종료\n\n");
+	printf("             ☆ Press Enter ☆");
 
 	while (1) {
 		if (_kbhit()) { // 입력이 있으면 실행
@@ -383,41 +377,7 @@ void StopScreen() {
 				PrintGameBoardAll();
 				PrintScore();
 				PrintNextBoard();
-
-				if (1) { // 다음 블록 출력
-					if (nextBlockType == 0)
-						TextColor(4);
-					if (nextBlockType == 1)
-						TextColor(2);
-					if (nextBlockType == 2)
-						TextColor(9);
-					if (nextBlockType == 3)
-						TextColor(10);
-					if (nextBlockType == 4)
-						TextColor(11);
-					if (nextBlockType == 5)
-						TextColor(12);
-					if (nextBlockType == 6)
-						TextColor(13);
-
-					for (int y = 0; y < 4; y++) {
-						for (int x = 0; x < 4; x++) {
-							GotoXY(15 + x, 12 + y);
-							if (BlockShape[blockType][0][y][x] == 1) {
-								printf("  ");
-							}
-						}
-					}
-
-					for (int y = 0; y < 4; y++) {
-						for (int x = 0; x < 4; x++) {
-							GotoXY(15 + x, 12 + y);
-							if (BlockShape[nextBlockType][0][y][x] == 1) {
-								printf("■");
-							}
-						}
-					}
-				}
+				PrintNextBlock();
 				return 0;
 			}
 		}
@@ -438,29 +398,29 @@ void ResetGameBoard()
 {
 	for (int y = 0; y < BORDER_HEIGHT; y++) { // 빈 공간
 		for (int x = 0; x < BORDER_WIDTH; x++)
-			copyBoard[y][x] = EMPTY;
+			copyBoard[y][x] = 1000;
 	}
 }
 
-// 게임보드 카피로 덮음
+
 void ResetCopyGameBoard()
 {
-	for (int y = 0; y < BORDER_HEIGHT; y++) { // 빈 공간
+	for (int y = 0; y < BORDER_HEIGHT; y++) {
 		for (int x = 0; x < BORDER_WIDTH; x++) {
-			copyBoard[y][x] = EMPTY;  // board를 copyboard로 덮음
+			copyBoard[y][x] = EMPTY;  
 		}
 	}
 
 	for (int y = 0; y < BORDER_HEIGHT; y++) {
 		for (int x = 0; x < BORDER_WIDTH; x++) {
 			if (x == 0 || x == BORDER_WIDTH - 1) // 좌-우 벽 그리기
-				copyBoard[y][x] = WALL; // board를 copyboard로 덮음
+				copyBoard[y][x] = WALL; 
 
 			if (y == BORDER_HEIGHT - 1) // 하단 벽 그리기
-				copyBoard[y][x] = WALL; // board를 copyboard로 덮음
+				copyBoard[y][x] = WALL; 
 
 			if (y == 2 && x != 0 && x != BORDER_WIDTH - 1) // 게임 오버라인 그리기
-				copyBoard[y][x] = OVERLINE; // board를 copyboard로 덮음
+				copyBoard[y][x] = OVERLINE;
 		}
 	}
 }
@@ -586,34 +546,32 @@ void PrintNextBoard() {
 
 	for (int x = 0; x < BORDER_WIDTH - 6; x++)
 	{
-		GotoXY(14 + x, 11);
+		GotoXY(14 + x, 10);
 		printf("▩");
 	}
 	for (int y = 0; y < BORDER_HEIGHT - 20; y++)
 	{
-		GotoXY(13, y + 12);
+		GotoXY(13, y + 11);
 		printf("▩");
 	}
 	for (int y = 0; y < BORDER_HEIGHT - 20; y++)
 	{
-		GotoXY(20, y + 12);
+		GotoXY(20, y + 11);
 		printf("▩");
 	}
 	for (int x = 0; x < BORDER_WIDTH - 6; x++)
 	{
-		GotoXY(14 + x, 16);
+		GotoXY(14 + x, 15);
 		printf("▩");
 	}
 }
 
-// 텍스트 출력
+// 점수 출력
 void PrintScore() {
 	TextColor(14);
-	GotoXY(13, 7);
-	printf("Clear Num : %3d", clearNum);
-	GotoXY(12, 8);
-	printf(" S C O R E : %5d", score);
-	GotoXY(14, 10);
+	GotoXY(13, 6);
+	printf("S C O R E : %4d", score);
+	GotoXY(14, 8);
 	printf("< N E X T >");
 }
 
@@ -627,21 +585,8 @@ void Keyboard() {
 			nkey = _getch();
 			switch (nkey) {
 			case UP:
-				/*if (CrushCheck(0, 0, 1) == TRUE) {
+				if (CrushCheck(0, 0, 1) == TRUE) {
 					Move(0, 0, 1);
-				}*/
-				// 벽에서 회전 -> 현재 코드 이해못함
-				for (int rotateMoveY = 0;; rotateMoveY--) {
-					for (int rotateMoveX = 0; rotateMoveX < 3; rotateMoveX++) {
-						for (int n = 0; n < 2; n++) {
-							rotateMoveX *= -1;
-							if (CrushCheck(rotateMoveX, rotateMoveY, 1) == TRUE) {
-								Move(rotateMoveX, rotateMoveY, 1);
-								return;
-							}
-						}
-					}
-
 				}
 				break;
 			case LEFT:
@@ -672,13 +617,12 @@ void Keyboard() {
 				if (CrushCheck(0, 1, 0) == TRUE) {
 					Move(0, 1, 0);
 				}
-				else
+				else {
+					FixBlock();
 					break;
+				}
 			}
 		}
-		//if (nkey == C) {
-		//	printf("C");
-		//}
 		if (nkey == P) // P면 정지화면 실행
 			StopScreen();
 		if (nkey == Esc)
@@ -756,7 +700,7 @@ void PrintNextBlock() {
 
 	for (int y = 0; y < 4; y++) {
 		for (int x = 0; x < 4; x++) {
-			GotoXY(15 + x, 12 + y);
+			GotoXY(15 + x, 11 + y);
 			if (BlockShape[blockType][0][y][x] == 1) {
 				printf("  ");
 			}
@@ -765,7 +709,7 @@ void PrintNextBlock() {
 
 	for (int y = 0; y < 4; y++) {
 		for (int x = 0; x < 4; x++) {
-			GotoXY(15 + x, 12 + y);
+			GotoXY(15 + x, 11 + y);
 			if (BlockShape[nextBlockType][0][y][x] == 1) {
 				printf("■");
 			}
@@ -799,8 +743,8 @@ void FixBlock() {
 	flagNewBlock = 1;
 }
 
-// 줄 완성시 삭제 및 점수 및 난이도 증가
-void LineClean() {
+// 줄 완성시 삭제 및 점수 증가
+void CleanLine() {
 	int blockCount = 0; // 한 줄의 블록 수
 	int clearLine = 0; // 삭제할 줄 위치
 	int clearCount = 0; // 삭제한 횟수
@@ -825,63 +769,57 @@ void LineClean() {
 			clearCount++; // 삭제한 횟수 체크
 			y++; // 삭제한 줄은 다시 체크
 			speedUp += 1; // 난이도 증가에 필요한 줄 수 증가
-			clearNum += 1;
 		}
 		blockCount = 0; // 한 줄의 블록 수 체크 초기화
 	}
 	if (clearCount == 1)
-		score += 100;
+		score += 10;
 	if (clearCount == 2)
-		score += 300;
+		score += 30;
 	if (clearCount == 3)
-		score += 500;
+		score += 50;
 	if (clearCount == 4)
-		score += 700;
+		score += 70;
+}
 
-	if (speedUp >= 4) // 줄 완성시 난이도 증가 및 난이도 증가에 필요한 줄 수
+// 줄 완성시 난이도 증가
+void Level() {
+	if (speedUp >= 4) // 난이도 증가에 필요한 줄 수
 	{
-		speed += 5; // 속도 증가
+		speed += 10; // 속도 증가
 		speedUp -= 4;
 	}
 }
 
 // 오버라인에 닿으면 게임 오버
 void GameOverCheck() {
-	for (int x = 1; x < BORDER_WIDTH - 1; x++) {
-		if (copyBoard[2][x] == FBLOCK) { // Y가 2인 위치에 고정된 블록이 있으면
-			TextColor(14);
-			GotoXY(4, 10);
-			printf("Game Over"); // 게임오버 텍스트 출력
-			GotoXY(2, 11);
-			printf("Enter : ReStart");
-			GotoXY(2, 12);
-			printf(" Esc : The End");
-			Sleep(1000); // 잠시 정지
-
-			while (1) {
-				if (_kbhit()) {
-					int nkey = _getch();
-					if (nkey == Enter)
-					{
-						system("cls");
-						ResetGameBoard();
-						ResetCopyGameBoard();
-						PrintGameBoardAll();
-						PrintNextBoard();
-						NewBlock();
-						cnt = 7;
-						speedUp = 0;
-						clearNum = 0;
-						score = 0;
-						speed = 0;
-						return 0;
-					}
-					if (nkey == Esc)
-						EndScreen();
-				}
-			}
+	for (int x = 1; x < BORDER_WIDTH - 1; x++)
+	{
+		if (copyBoard[2][x] == FBLOCK) // Y가 2인 위치에 고정된 블록이 있으면
+		{
+			PrintGameOver(); // 게임오버 화면 출력
+			system("cls"); // 화면 전체 비우기
+			ResetGameBoard(); // 초기화 게임보드
+			ResetCopyGameBoard(); // 초기화 카피 게임보드
+			PrintGameBoard(); // 게임보드 출력
+			EndScreen(); // 종료화면 출력
 		}
 	}
+}
+
+// 게임오버 화면 출력
+void PrintGameOver() {
+	PrintGameBoard(); // 블록이 비워진 화면 출력
+	GotoXY(4, 11);
+	printf("Game Over"); // 게임오버 텍스트 출력
+	GotoXY(2, 12);
+	printf("Press Any Button");
+	Sleep(1000); //몇 초간 정지
+
+	while (_kbhit()) { //Sleep 되어있는동안은 키 입력을 다 씹고
+		_getch();
+	}
+	_getch(); // 그 이후에 키 입력이 들어오면 탈출
 }
 
 // 블록 이동
@@ -912,4 +850,20 @@ void Move(int inputX, int inputY, int rotate) {
 	blockX = blockX + inputX; // 입력받은 만큼 x축 이동
 	blockY = blockY + inputY; // 입력받은 만큼 y축 이동
 	blockRotation = tempRotation;
+}
+
+void Drop() {
+	if (CrushCheck(0, 1, 0) == TRUE && flagCrush == 0) {
+		Move(0, 1, 0);
+	}
+	else if (CrushCheck(0, 1, 0) == TRUE && flagCrush == 1) {
+		flagCrush = 0;
+	}
+	else if (CrushCheck(0, 1, 0) == FALSE && flagCrush == 0) {
+		flagCrush = 1;
+	}
+	else if (CrushCheck(0, 1, 0) == FALSE && flagCrush == 1) {
+		FixBlock();
+		flagCrush = 0;
+	}
 }
