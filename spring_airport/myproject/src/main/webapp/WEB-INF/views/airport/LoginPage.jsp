@@ -44,6 +44,16 @@ form {
 	heihgt: 50px;
 }
 
+table {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+table, td, th {
+	border-collapse: collapse;
+	display: table;
+}
+
 nav {
 	margin-left: auto;
 	top: 0;
@@ -68,8 +78,12 @@ nav {
 	<!--  navbar -->
 	<nav class="navbar navbar-dark" float=right;>
 		<div class="container-fluid">
+			<div style="display:flex; width:200px">
 			<a href="MainPage" class="navbar-brand"><h2
-					style="font-weight: 800;">티켓 컴바인</h2></a>
+					style="font-weight: 800; display:flex;">티켓 컴바인</h2>
+					</a>
+					<img src="/resources/img/ramus.png" style="height:50px" >
+			</div>
 		</div>
 	</nav>
 
@@ -80,15 +94,29 @@ nav {
 		crossorigin="anonymous">
 
 	<h1>Login Page</h1>
-	<p>
-	<form action="Login" method="post">
-		ID : <input type="text" placeHolder="id입력" name="id" /> <br> <br>
-		PW : <input type="password" placeHolder="password 입력" name="pw" /> <br> <br>
 
+		<table>
+		<tr>
+			<form action="Login" method="post">
+				<td>아이디</td>
+				<td><input type="text"  name="id"
+					class="form-control" style="width: 400px"> <br /></td>
+		</tr>
+		
+		<tr>
+			<td>비밀번호  <input type="password" 
+				name="pw" class="form-control" style="width: 400px" /><br />
+			</td>
+		</tr>
 
-		<input type="submit" value="로그인" />
-	</form>
-	</p>
+		<tr><br />
+			<td><input type="submit" value="로그인"
+				class="btn btn-outline-success" /></td>
+		</tr>
+
+		</form>
+	</table>
+
 
 </body>
 </html>

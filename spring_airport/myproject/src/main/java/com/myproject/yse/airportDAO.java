@@ -31,20 +31,14 @@ public class airportDAO {
 			System.out.println("!!!!!"+publeYear);
 			return this.sqlSessionTemplate.selectList("airport.detail_view",nation);
 		}
-		/*
-		public int signup(Map<String, Object> map){
-		
-			
-			return this.sqlSessionTemplate.insert("airport.sing_up",map);
-		} 
-		*/
+
 		
 			public int sign_up(MemberDto member){
 				
 			return this.sqlSessionTemplate.insert("airport.sing_up",member);
 		}
 		
-		public String login(String id, String pw){
+		public String login(String id, String pw) {
 			Map<String, Object> loginCheck = new HashMap<String, Object>();
 			loginCheck.put("id", id);
 			loginCheck.put("pw", pw);

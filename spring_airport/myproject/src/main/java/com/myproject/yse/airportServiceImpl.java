@@ -25,11 +25,7 @@ public class airportServiceImpl implements airportService {
 	public List<Map<String, Object>> detail(String depart, String arrive, String publeYear){
 		return this.airportdao.detail(depart, arrive, publeYear);
 	}
-	/*
-	@Override
-	public int signup(Map<String, Object> map){
-		return this.airportdao.signup(map);
-	}*/
+
 	@Override
 	public int sign_up(MemberDto member){
 		return this.airportdao.sign_up(member);
@@ -47,19 +43,16 @@ public class airportServiceImpl implements airportService {
 	@Override
 	public TicketDto ticketInfor(String ticketnum) {
 		System.out.println("!!!!!impl"+ticketnum);
-		// TODO Auto-generated method stub
 		return this.airportdao.ticketInformation(ticketnum);
 	}
 	
 	@Override
 	public int book_insert(BookDto bdto) {
-		// TODO Auto-generated method stub
 		return this.airportdao.bookInsert(bdto);
 	}
 
 	@Override
 	public List<BookDto> myticket(String attribute) {
-		// TODO Auto-generated method stub
 		return this.airportdao.myticket_find(attribute);
 	}
 

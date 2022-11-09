@@ -60,7 +60,12 @@ nav {
 <!--  navbar -->
    <nav class="navbar navbar-dark" float=right;>
       <div class="container-fluid">
-         <a href="MainPage" class="navbar-brand"><h2 style=font-weight:800;>티켓 컴바인</h2></a>
+         <div style="display:flex; width:200px">
+			<a href="MainPage" class="navbar-brand"><h2
+					style="font-weight: 800; display:flex;">티켓 컴바인</h2>
+					</a>
+					<img src="/resources/img/ramus.png" style="height:50px" >
+			</div>
 
          <!-- 로그아웃 -->
          <ul id="nav3" class="nav justify-content-end bg-light">
@@ -215,7 +220,7 @@ nav {
 			</c:when>
 
 			<c:when test="${item['도착공항'] eq 'HKG' }">
-				<%IMG_PATH2="/resources/img/HKG.png"; %>
+				<%IMG_PATH2="/resources/img/HKG.jpg"; %>
 			</c:when>
 
 			<c:when test="${item['도착공항'] eq 'UBN' }">

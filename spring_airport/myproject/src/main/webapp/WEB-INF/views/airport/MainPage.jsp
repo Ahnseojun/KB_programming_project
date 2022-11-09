@@ -82,9 +82,12 @@ nav {
 	<!--  navbar -->
 	<nav class="navbar navbar-dark" float=right;>
 		<div class="container-fluid">
+			<div style="display:flex; width:200px">
 			<a href="MainPage" class="navbar-brand"><h2
-					style="font-weight: 800;">티켓 컴바인</h2></a>
-
+					style="font-weight: 800; display:flex;">티켓 컴바인</h2>
+					</a>
+					<img src="/resources/img/ramus.png" style="height:50px" >
+			</div>	
 			<!-- 로그아웃 -->
 			<ul id="nav3" class="nav justify-content-end bg-light">
 				<li class="nav-item">
@@ -368,6 +371,7 @@ nav {
 		/* 캘린더 */
 		$(function() {
 			$("input[name='publeYear']").datepicker(config);
+			$("input[name='publeYear']").datepicker("setDate", "today");
 		});
 	</script>
 

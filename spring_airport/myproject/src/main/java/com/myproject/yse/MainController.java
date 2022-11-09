@@ -47,7 +47,6 @@ public class MainController {
 	public ModelAndView book(@RequestParam String depart, @RequestParam String arrive, @RequestParam String publeYear) {
 
 		ModelAndView mav = new ModelAndView();
-		System.out.println("publeYear :#####################" + publeYear);
 
 		if (publeYear == "") {
 			boolean bo = true;
@@ -88,10 +87,20 @@ public class MainController {
 	@RequestMapping(value = "/SignUp", method = RequestMethod.POST)
 
 	public ModelAndView signuppost(@RequestParam String id, @RequestParam String pw, @RequestParam String name,
-			@RequestParam String gender, @RequestParam int age) {
+			@RequestParam String gender, @RequestParam String age) {
 
+		if(id == "" || pw == "" || name =="" ||  age == "") {
+	         ModelAndView mav = new ModelAndView();
+	         boolean duple = true;
+	         mav.addObject("duple2", duple);
+	         mav.setViewName("airport/SignUp");
+
+	      return mav;
+	      }	
+		
+		
 		MemberDto member = new MemberDto();
-		member.setAge(age);
+		member.setAge(Integer.parseInt(age));
 		member.setGender(gender);
 		member.setId(id);
 		member.setName(name);
@@ -103,10 +112,9 @@ public class MainController {
 		ModelAndView mav = new ModelAndView();
 
 		String checkDuple = this.airportservice.checkDuplicate(id);
-		System.out.println(checkDuple + "????????????????????????");
 
 		if (checkDuple != null) {
-			System.out.println("중복이요ㅅㄱ");
+			System.out.println("중복입니다");
 			boolean bo = true;
 			mav.addObject("duple", bo);
 			mav.setViewName("airport/SignUp");
@@ -117,26 +125,7 @@ public class MainController {
 
 		return mav;
 	}
-	/*
-	 * @RequestMapping(value="/SignUp", method=RequestMethod.POST)
-	 * 
-	 * public ModelAndView signupDB(@RequestParam Map<String, Object> map) {
-	 * 
-	 * ModelAndView mav = new ModelAndView();
-	 * 
-	 * String pw = map.get("password").toString(); //1번째 dto를 쓰는이유 //2번째 map이지금 저렇게
-	 * 나오는데 password만 빼올수있는 방법 //System.out.println(map.get("password"));
-	 * PasswordEncoder p = new BCryptPasswordEncoder(); String Bpw = p.encode(pw);
-	 * 
-	 * System.out.println(Bpw); map.put("password", Bpw); int member =
-	 * this.airportservice.signup(map);
-	 * 
-	 * mav.setViewName("airport/SignUp");
-	 * 
-	 * 
-	 * 
-	 * return mav; }
-	 */
+
 
 	@RequestMapping(value = "/Login", method = RequestMethod.GET)
 	public ModelAndView login() {
@@ -252,24 +241,7 @@ public class MainController {
 		
 		System.out.println("정체는?"+bdto2);
 		System.out.println("사이즈는?"+bdto.size());
-//		for(int i=0; i<2; i++) {
-//			bdto2.get(i).setId(bdto.get(i).getId());
-//		}
-		
-		System.out.println("!!!!!!!!!!!!!!!!!!"+bdto2);
-		
-		/*
-		bdto2.setId(bdto.getId());
-		bdto2.setName(bdto.getName());
-		bdto2.setTicketnum(bdto.getTicketnum());
-		bdto2.set도착공항(bdto.get도착공항());
-		bdto2.set도착시간(bdto.get도착시간());
-		bdto2.set운항편명(bdto.get운항편명());
-		bdto2.set출발날짜(bdto.get출발날짜());
-		bdto2.set출발공항(bdto.get출발공항());
-		bdto2.set출발시간(bdto.get출발시간());
-		bdto2.set항공사(bdto.get항공사());
-*/
+
 		mav.addObject("data", bdto);
 		mav.addObject("check", bdto);
 		mav.setViewName("airport/MyPage");
@@ -282,8 +254,7 @@ public class MainController {
 
 		ModelAndView mav = new ModelAndView();
 
-		System.out.println("sssss");
-
+		
 		mav.setViewName("airport/SignUp");
 		return mav;
 
