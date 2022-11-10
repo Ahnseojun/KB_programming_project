@@ -82,23 +82,26 @@ nav {
 	<!--  navbar -->
 	<nav class="navbar navbar-dark" float=right;>
 		<div class="container-fluid">
-			<div style="display:flex; width:200px">
-			<a href="MainPage" class="navbar-brand"><h2
-					style="font-weight: 800; display:flex;">티켓 컴바인</h2>
-					</a>
-					<img src="/resources/img/ramus.png" style="height:50px" >
-			</div>	
+			<div style="display: flex; width: 200px;">
+				<a href="MainPage" class="navbar-brand"><h2
+						style="font-weight: 800;">티켓 컴바인</h2></a> <img
+					src="/resources/img/ramus.png" style="height: 50px;" />
+			</div>
+			<a href="d3data"><img src="/resources/img/d3.png"
+				style="height: 60px;" /></a>
+
+
 			<!-- 로그아웃 -->
 			<ul id="nav3" class="nav justify-content-end bg-light">
 				<li class="nav-item">
-					<c:if test="${sessionName ne null }">
+					<!-- 로그아웃 --> <c:if test="${sessionName ne null }">
 						<form action="/Logout" class="d-flex" method="get">
 							<input type="submit" value="로그아웃" class="btn btn-outline-success" />
 						</form>
 					</c:if>
 				</li>
 
-			<!-- 회원가입 -->
+				<!-- 회원가입 -->
 				<c:if test="${sessionName eq null }">
 					<li>
 						<form action="/SignUp" method="get" class="d-flex">
@@ -130,234 +133,242 @@ nav {
 	</nav>
 
 
+	<c:if test="${sessionId eq 'admin' }">
+		<div class="card text-center" style="margin-top: 70px;">
+
+			<div class="card-body">
+				<h1 style="color: white; margin-top: 50px;">관리자 페이지입니다.</h1>
+			</div>
+		</div>
+	</c:if>
+
+	<c:if test="${sessionId ne 'admin' }">
 
 
+		<div class="card text-center" style="margin-top: 70px;">
 
+			<div class="card-body">
 
-	<div class="card text-center" style="margin-top: 70px;">
-
-		<div class="card-body">
-
-			<c:if test="${duple}">
+				<c:if test="${duple }">
 	날짜를 입력하세요. <button onclick="location.href='MainPage'">home</button>
-			</c:if>
+				</c:if>
 
-			<c:if test="${sessionName ne null }">
-				<h2 style="color: white; font-weight: 700; margin-top: 35px;">${sessionName }님
-					반갑습니다!</h2>
-			</c:if>
+				<c:if test="${sessionName ne null }">
+					<h2 style="color: white; font-weight: 700; margin-top: 35px;">${sessionName }님
+						반갑습니다!</h2>
+				</c:if>
 
 
-			<form action="/MainPage" method="post" style="margin-top: 20px;">
-				<div
-					style="background-color: rgba(5, 18, 42, 0.85); height: 200px; width: 1200px; margin: 0 auto; padding: 60px; border-radius: 8px; margin-top: 70px;'">
-					<select style="height: 50px;" name="depart">
-						<c:forEach var="item" items="${data}">
-							<option value="${item}">
-								<c:choose>
-									<c:when test="${item eq 'GMP' }">
+				<form action="/MainPage" method="post" style="margin-top: 20px;">
+
+					<div
+						style="background-color: rgba(5, 18, 42, 0.85); height: 200px; width: 1200px; margin: 0 auto; padding: 60px; border-radius: 8px; margin-top: 70px;'">
+						<select style="height: 50px;" name="depart">
+							<c:forEach var="item" items="${data}">
+								<option value="${item}">
+									<c:choose>
+										<c:when test="${item eq 'GMP' }">
 				김포
 				</c:when>
-									<c:when test="${item eq 'HND' }">
+										<c:when test="${item eq 'HND' }">
 				일본(하네다)
 				</c:when>
-									<c:when test="${item eq 'PUS' }">
+										<c:when test="${item eq 'PUS' }">
 				부산
 				</c:when>
-									<c:when test="${item eq 'NRT' }">
+										<c:when test="${item eq 'NRT' }">
 				일본(나리타)
 				</c:when>
-									<c:when test="${item eq 'KIX' }">
+										<c:when test="${item eq 'KIX' }">
 				일본(간사이)
 				</c:when>
-									<c:when test="${item eq 'FUK' }">
+										<c:when test="${item eq 'FUK' }">
 				일본(후쿠오카)
 				</c:when>
-									<c:when test="${item eq 'CTS' }">
+										<c:when test="${item eq 'CTS' }">
 				일본(신치토세)
 				</c:when>
-									<c:when test="${item eq 'TAO' }">
+										<c:when test="${item eq 'TAO' }">
 				중국(칭다오)
 				</c:when>
-									<c:when test="${item eq 'HKG' }">
+										<c:when test="${item eq 'HKG' }">
 				홍콩
 				</c:when>
-									<c:when test="${item eq 'UBN' }">
+										<c:when test="${item eq 'UBN' }">
 				몽골(칭키즈 칸)
 				</c:when>
-									<c:when test="${item eq 'GUM' }">
+										<c:when test="${item eq 'GUM' }">
 				괌
 				</c:when>
-									<c:when test="${item eq 'SPN' }">
+										<c:when test="${item eq 'SPN' }">
 				사이판
 				</c:when>
-									<c:when test="${item eq 'BKK' }">
+										<c:when test="${item eq 'BKK' }">
 				태국(수완나품)
 				</c:when>
-									<c:when test="${item eq 'DAD' }">
+										<c:when test="${item eq 'DAD' }">
 				베트남(다낭)
 				</c:when>
-									<c:when test="${item eq 'CXR' }">
+										<c:when test="${item eq 'CXR' }">
 				베트남(깜라인)
 				</c:when>
-									<c:when test="${item eq 'CRK' }">
+										<c:when test="${item eq 'CRK' }">
 				필리핀(클락)
 				</c:when>
-									<c:when test="${item eq 'BKI' }">
+										<c:when test="${item eq 'BKI' }">
 				말레이시아(코타키나발루)
 				</c:when>
-									<c:when test="${item eq 'CEB' }">
+										<c:when test="${item eq 'CEB' }">
 				필리핀(막탄)
 				</c:when>
-									<c:when test="${item eq 'SIN' }">
+										<c:when test="${item eq 'SIN' }">
 				싱가포르
 				</c:when>
-									<c:when test="${item eq 'TPE' }">
+										<c:when test="${item eq 'TPE' }">
 				타이완
 				</c:when>
-									<c:when test="${item eq 'YNY' }">
+										<c:when test="${item eq 'YNY' }">
 				대한민국(양양)
 				</c:when>
-									<c:when test="${item eq 'SGN' }">
+										<c:when test="${item eq 'SGN' }">
 				베트남(떤선녓)
 				</c:when>
-									<c:when test="${item eq 'HAN' }">
+										<c:when test="${item eq 'HAN' }">
 				베트남(노이바이)
 				</c:when>
-									<c:when test="${item eq 'MWX' }">
+										<c:when test="${item eq 'MWX' }">
 				대한민국(무안)
 				</c:when>
-									<c:when test="${item eq 'CJU' }">
+										<c:when test="${item eq 'CJU' }">
 				제주
 				</c:when>
-									<c:when test="${item eq 'CNX' }">
+										<c:when test="${item eq 'CNX' }">
 				태국(치앙마이)
 				</c:when>
-									<c:when test="${item eq 'XIY' }">
+										<c:when test="${item eq 'XIY' }">
 				중국(시안)
 				</c:when>
-									<c:when test="${item eq 'MNL' }">
+										<c:when test="${item eq 'MNL' }">
 				필리핀(마날라)
 				</c:when>
-									<c:when test="${item eq 'YNJ' }">
+										<c:when test="${item eq 'YNJ' }">
 				중국(옌지)
 				</c:when>
-									<c:when test="${item eq 'TAE' }">
+										<c:when test="${item eq 'TAE' }">
 				대구
 				</c:when>
-								</c:choose>
-							</option>
-						</c:forEach>
-					</select> <select name="arrive" style="height: 50px; margin-right: 5px;">
-						<c:forEach var="item" items="${data}">
-							<option value="${item}">
-								<c:choose>
-									<c:when test="${item eq 'GMP' }">
+									</c:choose>
+								</option>
+							</c:forEach>
+						</select> <select name="arrive" style="height: 50px; margin-right: 5px;">
+							<c:forEach var="item" items="${data}">
+								<option value="${item}">
+									<c:choose>
+										<c:when test="${item eq 'GMP' }">
 				김포
 				</c:when>
-									<c:when test="${item eq 'HND' }">
+										<c:when test="${item eq 'HND' }">
 				일본(하네다)
 				</c:when>
-									<c:when test="${item eq 'PUS' }">
+										<c:when test="${item eq 'PUS' }">
 				부산
 				</c:when>
-									<c:when test="${item eq 'NRT' }">
+										<c:when test="${item eq 'NRT' }">
 				일본(나리타)
 				</c:when>
-									<c:when test="${item eq 'KIX' }">
+										<c:when test="${item eq 'KIX' }">
 				일본(간사이)
 				</c:when>
-									<c:when test="${item eq 'FUK' }">
+										<c:when test="${item eq 'FUK' }">
 				일본(후쿠오카)
 				</c:when>
-									<c:when test="${item eq 'CTS' }">
+										<c:when test="${item eq 'CTS' }">
 				일본(신치토세)
 				</c:when>
-									<c:when test="${item eq 'TAO' }">
+										<c:when test="${item eq 'TAO' }">
 				중국(칭다오)
 				</c:when>
-									<c:when test="${item eq 'HKG' }">
+										<c:when test="${item eq 'HKG' }">
 				홍콩
 				</c:when>
-									<c:when test="${item eq 'UBN' }">
+										<c:when test="${item eq 'UBN' }">
 				몽골(칭키즈 칸)
 				</c:when>
-									<c:when test="${item eq 'GUM' }">
+										<c:when test="${item eq 'GUM' }">
 				괌
 				</c:when>
-									<c:when test="${item eq 'SPN' }">
+										<c:when test="${item eq 'SPN' }">
 				사이판
 				</c:when>
-									<c:when test="${item eq 'BKK' }">
+										<c:when test="${item eq 'BKK' }">
 				태국(수완나품)
 				</c:when>
-									<c:when test="${item eq 'DAD' }">
+										<c:when test="${item eq 'DAD' }">
 				베트남(다낭)
 				</c:when>
-									<c:when test="${item eq 'CXR' }">
+										<c:when test="${item eq 'CXR' }">
 				베트남(깜라인)
 				</c:when>
-									<c:when test="${item eq 'CRK' }">
+										<c:when test="${item eq 'CRK' }">
 				필리핀(클락)
 				</c:when>
-									<c:when test="${item eq 'BKI' }">
+										<c:when test="${item eq 'BKI' }">
 				말레이시아(코타키나발루)
 				</c:when>
-									<c:when test="${item eq 'CEB' }">
+										<c:when test="${item eq 'CEB' }">
 				필리핀(막탄)
 				</c:when>
-									<c:when test="${item eq 'SIN' }">
+										<c:when test="${item eq 'SIN' }">
 				싱가포르
 				</c:when>
-									<c:when test="${item eq 'TPE' }">
+										<c:when test="${item eq 'TPE' }">
 				타이완
 				</c:when>
-									<c:when test="${item eq 'YNY' }">
+										<c:when test="${item eq 'YNY' }">
 				대한민국(양양)
 				</c:when>
-									<c:when test="${item eq 'SGN' }">
+										<c:when test="${item eq 'SGN' }">
 				베트남(떤선녓)
 				</c:when>
-									<c:when test="${item eq 'HAN' }">
+										<c:when test="${item eq 'HAN' }">
 				베트남(노이바이)
 				</c:when>
-									<c:when test="${item eq 'MWX' }">
+										<c:when test="${item eq 'MWX' }">
 				대한민국(무안)
 				</c:when>
-									<c:when test="${item eq 'CJU' }">
+										<c:when test="${item eq 'CJU' }">
 				제주
 				</c:when>
-									<c:when test="${item eq 'CNX' }">
+										<c:when test="${item eq 'CNX' }">
 				태국(치앙마이)
 				</c:when>
-									<c:when test="${item eq 'XIY' }">
+										<c:when test="${item eq 'XIY' }">
 				중국(시안)
 				</c:when>
-									<c:when test="${item eq 'MNL' }">
+										<c:when test="${item eq 'MNL' }">
 				필리핀(마날라)
 				</c:when>
-									<c:when test="${item eq 'YNJ' }">
+										<c:when test="${item eq 'YNJ' }">
 				중국(옌지)
 				</c:when>
-									<c:when test="${item eq 'TAE' }">
+										<c:when test="${item eq 'TAE' }">
 				대구
 				</c:when>
-								</c:choose>
-							</option>
-						</c:forEach>
-						<input name="publeYear" autocomplete="off" readonly="readonly" />
-					</select> <input class="btn btn-primary btn-lg" type="submit" value="항공권 검색" />
+									</c:choose>
+								</option>
+							</c:forEach>
+							<input name="publeYear" autocomplete="off" readonly="readonly" />
+						</select> <input class="btn btn-primary btn-lg" type="submit"
+							value="항공권 검색" />
 
-				</div>
-			</form>
+					</div>
+				</form>
 
 
-
-
+			</div>
 
 		</div>
-
-	</div>
+	</c:if>
 
 	<script>
 		/* 설정 */
@@ -365,14 +376,16 @@ nav {
 			dateFormat : 'yy-mm-dd',
 			showOn : "button",
 			buttonText : "날짜 선택"
-
+			
 		}
 
 		/* 캘린더 */
 		$(function() {
 			$("input[name='publeYear']").datepicker(config);
 			$("input[name='publeYear']").datepicker("setDate", "today");
+			
 		});
+	
 	</script>
 
 	<link

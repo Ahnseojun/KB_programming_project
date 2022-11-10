@@ -66,6 +66,24 @@
 	select id from member where id=#{id}
 	]]>
 	</select>
+
+	<!-- d3 -->
+	<select id="d3_data" parameterType="hashMap" resultType="hashMap">
+	<![CDATA[
+	select * from d3data;
+	]]>
+	</select>
 	
+	<select id="all_view" resultType="com.myproject.dto.BookDto">
+	<![CDATA[
+	select * from book;
+	]]>
+	</select>
+	
+	<delete id="delete" parameterType="hashmap">
+	<![CDATA[
+	delete from book where id=#{id} and ticketnum=#{ticketnum};
+	]]>
+	</delete>
 	
 </mapper>

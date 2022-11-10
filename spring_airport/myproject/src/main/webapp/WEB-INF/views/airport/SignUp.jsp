@@ -25,12 +25,14 @@
 <style>
 body {
    height: 100%;
+  
 }
 
 h1 {
    text-decoration: none;
    text-align: center;
-   color : red;
+   color:red;
+   font-weight:900;
 }
 
 table {
@@ -81,11 +83,10 @@ nav {
    <!--  navbar -->
    <nav class="navbar navbar-dark" float=right;>
       <div class="container-fluid">
-         <div style="display:flex; width:200px">
-			<a href="MainPage" class="navbar-brand"><h2
-					style="font-weight: 800; display:flex;">티켓 컴바인</h2>
-					</a>
-					<img src="/resources/img/ramus.png" style="height:50px" >
+       <div class="container-fluid">
+      	<div style="display:flex; width:200px;">
+         <a href="MainPage" class="navbar-brand"><h2 style=font-weight:800;>티켓 컴바인</h2></a>
+			<img src="/resources/img/ramus.png" style="height:50px;"/>
 			</div>
       </div>
    </nav>
@@ -97,49 +98,48 @@ nav {
       crossorigin="anonymous">
 
 
-   <c:if test="${duple }">
-      <h1 style="font-weight:900" >ID 중복입니다^^</h1>
+   <c:if test="${duple}">
+      <h1 style="font-weight:900">아이디 중복입니다</h1>
    </c:if>
+   
+   <c:if test="${duple2}">
+   		<h1 style="font-weight:900">공백이 있습니다</h1>
+   	</c:if>
 
-	<c:if test="${duple2 }">
-         <h1 style="font-weight:900" >공백이 있습니다</h1>
-      </c:if>
 
    <table style="height:500px;">
       <tr>
          <form action="/SignUp" method="post">
-            <td>아이디 </td>
+            <td>아이디</td>
             <td><input type="text" name="id" class="form-control">
               </td>
       </tr>
       <tr>
-         <td>비밀번호 </td>
+         <td>비밀번호</td>
          <td><input type="password" name="pw" class="form-control"></td>
       </tr>
       <tr>
-         <td>이름 </td>
+         <td>이름</td>
          <td><input type="text" name="name" class="form-control"></td>
       </tr>
       <tr style="margin-bottom:20px;">
          <td>성별</td>
          <td><label class="form-check-label" for="man"> <input
                type="radio" name="gender" value="man" class="form-check-input"
-               id="man" checked> 남자
+               id="man" checked > 남자
          </label> <label class="form-check-label" for="woman"> <input
                type="radio" name="gender" value="woman" class="form-check-input"
-               id="woman" style="margin-left: 10px;"> 여자</label> </td>
-        
+               id="woman" style="margin-left: 10px";> 여자</label> </td>     
       </tr> 
 
      <tr style="margin-top:30px;">
-         <td>나이 </td>
+         <td>나이</td>
          <td><input type="text" name="age" class="form-control"></td>
       </tr>
 
       <tr>
          <td><input type="submit" value="회원가입"
             class="btn btn-outline-success"></td>
-
       </tr>
       </form>
    </table>

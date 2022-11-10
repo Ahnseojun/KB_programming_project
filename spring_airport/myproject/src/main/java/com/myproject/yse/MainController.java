@@ -1,6 +1,7 @@
 package com.myproject.yse;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -61,7 +62,7 @@ public class MainController {
 
 	@RequestMapping(value = "/book", method = RequestMethod.GET)
 	public ModelAndView checkId(@RequestParam String depart, @RequestParam String arrive,
-			@RequestParam String publeYear) { // ¿©·¯°³ÀÇ °ªµéÀ» ¹ŞÀ» ¼ö ÀÖ´Ù.
+			@RequestParam String publeYear) {
 		ModelAndView mav = new ModelAndView();
 
 		List<Map<String, Object>> checkN = this.airportservice.detail(depart, arrive, publeYear);
@@ -89,16 +90,15 @@ public class MainController {
 	public ModelAndView signuppost(@RequestParam String id, @RequestParam String pw, @RequestParam String name,
 			@RequestParam String gender, @RequestParam String age) {
 
-		if(id == "" || pw == "" || name =="" ||  age == "") {
-	         ModelAndView mav = new ModelAndView();
-	         boolean duple = true;
-	         mav.addObject("duple2", duple);
-	         mav.setViewName("airport/SignUp");
+		if (id == "" || pw == "" || name == "" || age == "") {
+			ModelAndView mav = new ModelAndView();
+			boolean duple = true;
+			mav.addObject("duple2", duple);
+			mav.setViewName("airport/SignUp");
 
-	      return mav;
-	      }	
-		
-		
+			return mav;
+		}
+
 		MemberDto member = new MemberDto();
 		member.setAge(Integer.parseInt(age));
 		member.setGender(gender);
@@ -114,7 +114,7 @@ public class MainController {
 		String checkDuple = this.airportservice.checkDuplicate(id);
 
 		if (checkDuple != null) {
-			System.out.println("Áßº¹ÀÔ´Ï´Ù");
+
 			boolean bo = true;
 			mav.addObject("duple", bo);
 			mav.setViewName("airport/SignUp");
@@ -125,7 +125,6 @@ public class MainController {
 
 		return mav;
 	}
-
 
 	@RequestMapping(value = "/Login", method = RequestMethod.GET)
 	public ModelAndView login() {
@@ -156,13 +155,13 @@ public class MainController {
 			session.setAttribute("sessionGender", dtos.getGender());
 			session.setAttribute("sessionAge", dtos.getAge());
 
-			// ÀÌ¸§ ¾ÆÀÌµğ
+			// ì´ë¦„ ì•„ì´ë””
 
 			mav.setViewName("redirect:/MainPage");
 
 		} else {
 
-			System.out.println("½ÇÆĞ");
+			System.out.println("ì‹¤íŒ¨");
 
 			mav.setViewName("airport/LoginPage");
 		}
@@ -187,7 +186,7 @@ public class MainController {
 		HttpSession session = request.getSession();
 		session.getAttribute("sessionId");
 
-		// ¹öÆ°À¸·Î Äõ¸®¹® ½ÇÇàÇÏ°ÔÇÏ±â Áö±İÀº µé¾î¿ÀÀÚ¸¶ÀÚ Äõ¸®¹®¤©½ÇÇà´ï, °ü¸®ÀÚÀÏ°æ¿ì ´Ù º¼¼öÀÖ´Â°Å
+		// ë²„íŠ¼ìœ¼ë¡œ ì¿¼ë¦¬ë¬¸ ì‹¤í–‰í•˜ê²Œí•˜ê¸° ì§€ê¸ˆì€ ë“¤ì–´ì˜¤ìë§ˆì ì¿¼ë¦¬ë¬¸ã„¹ì‹¤í–‰ëŒ, ê´€ë¦¬ìì¼ê²½ìš° ë‹¤ ë³¼ìˆ˜ìˆëŠ”ê±°
 
 		mav.setViewName("airport/MyPage");
 
@@ -200,47 +199,62 @@ public class MainController {
 
 		ModelAndView mav = new ModelAndView();
 
-		System.out.println("publeYear!!!" + publeYear);
-		System.out.println(id);
 		MemberDto dtos = this.airportservice.loginInfor(id);
+
 		TicketDto tdto = this.airportservice.ticketInfor(ticketnum);
 
-		System.out.println(dtos.getName());
-		System.out.println(tdto.get¿îÇ×Æí¸í());
 		BookDto bdto = new BookDto();
 		bdto.setId(dtos.getId());
 		bdto.setName(dtos.getName());
 		bdto.setTicketnum(tdto.getTicketnum());
-		bdto.setµµÂø°øÇ×(tdto.getµµÂø°øÇ×());
-		bdto.setµµÂø½Ã°£(tdto.getµµÂø½Ã°£());
-		bdto.set¿îÇ×Æí¸í(tdto.get¿îÇ×Æí¸í());
-		bdto.setÃâ¹ß°øÇ×(tdto.getÃâ¹ß°øÇ×());
-		bdto.setÃâ¹ß½Ã°£(tdto.getÃâ¹ß½Ã°£());
-		bdto.setÇ×°ø»ç(tdto.getÇ×°ø»ç());
-		bdto.setÃâ¹ß³¯Â¥(publeYear);
+		bdto.setë„ì°©ê³µí•­(tdto.getë„ì°©ê³µí•­());
+		bdto.setë„ì°©ì‹œê°„(tdto.getë„ì°©ì‹œê°„());
+		bdto.setìš´í•­í¸ëª…(tdto.getìš´í•­í¸ëª…());
+		bdto.setì¶œë°œê³µí•­(tdto.getì¶œë°œê³µí•­());
+		bdto.setì¶œë°œì‹œê°„(tdto.getì¶œë°œì‹œê°„());
+		bdto.setí•­ê³µì‚¬(tdto.getí•­ê³µì‚¬());
+		bdto.setì¶œë°œë‚ ì§œ(publeYear);
 
-		int bookinsert = this.airportservice.book_insert(bdto);
+		// ë¶í…Œì´ë¸”ì— idë¥¼ ê²€ìƒ‰í•´ì„œ ì¶œë°œë‚ ì§œë‘ í‹°ì¼“ë„˜ë²„ë¥¼ ê°€ì ¸ì™€ì„œ
 
-		mav.setViewName("redirect:/MainPage?bookcomplete");
+		List<BookDto> comp = new ArrayList<BookDto>();
 
+		comp = this.airportservice.myticket(id);
+
+		if (comp.size() == 0) {
+			int bookinsert = this.airportservice.book_insert(bdto);
+			mav.setViewName("redirect:/MainPage?bookcomplete");
+		}
+
+		boolean in = false;
+		for (int i = 0; i < comp.size(); i++) {
+
+			if (ticketnum.equals(comp.get(i).getTicketnum()) && publeYear.equals(comp.get(i).getì¶œë°œë‚ ì§œ())) {
+
+				in = false;
+				mav.setViewName("redirect:/MainPage?bookfail");
+				break;
+			}
+
+			else {
+				in = true;
+				mav.setViewName("redirect:/MainPage?bookcomplete");
+
+			}
+		}
+		if (in) {
+			int bookinsert = this.airportservice.book_insert(bdto);
+		}
 		return mav;
 	}
 
 	@RequestMapping(value = "/myticketCheck", method = RequestMethod.GET)
 	public ModelAndView TicketCheck(@RequestParam String id) {
-		System.out.println("click");
+
 		ModelAndView mav = new ModelAndView();
 
 		List<BookDto> bdto = null;
 		bdto = this.airportservice.myticket(id);
-		System.out.println("111111111111"+bdto);
-
-		List<BookDto> bdto2 = new ArrayList<BookDto>();
-		System.out.println("2222222222"+bdto2);
-		
-		
-		System.out.println("Á¤Ã¼´Â?"+bdto2);
-		System.out.println("»çÀÌÁî´Â?"+bdto.size());
 
 		mav.addObject("data", bdto);
 		mav.addObject("check", bdto);
@@ -254,8 +268,52 @@ public class MainController {
 
 		ModelAndView mav = new ModelAndView();
 
-		
 		mav.setViewName("airport/SignUp");
+		return mav;
+
+	}
+
+	@RequestMapping(value = "/d3data", method = RequestMethod.GET)
+	public ModelAndView d3data() {
+
+		ModelAndView mav = new ModelAndView();
+
+		List<Map<String, Object>> d3chart = this.airportservice.ChartList();
+
+		mav.addObject("data", d3chart);
+
+		System.out.println(d3chart);
+
+		mav.setViewName("airport/d3data");
+		return mav;
+
+	}
+
+	@RequestMapping(value = "/adminCheck", method = RequestMethod.GET)
+	public ModelAndView adminCheck() {
+
+		ModelAndView mav = new ModelAndView();
+
+		List<BookDto> bdto = new ArrayList<BookDto>();
+		bdto = this.airportservice.allticket();
+
+		mav.addObject("adminList", bdto);
+
+		mav.setViewName("airport/MyPage");
+
+		return mav;
+
+	}
+
+	@RequestMapping(value = "/adminDelete", method = RequestMethod.GET)
+	public ModelAndView adminDelete(@RequestParam String id, @RequestParam String ticketnum) {
+
+		ModelAndView mav = new ModelAndView();
+
+		int del = this.airportservice.deleteTicket(id, ticketnum);
+
+		mav.setViewName("airport/MyPage");
+
 		return mav;
 
 	}
