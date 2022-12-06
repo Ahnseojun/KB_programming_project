@@ -10,7 +10,8 @@ namespace MyPCRoom
     public class DataManager
     {
         // 자동차들 저장하는 변수
-        public static List<PC_User> Cars = new List<PC_User>();
+        public static List<PC_User> Users = new List<PC_User>();
+        public static List<PC_User> SortedUsers = new List<PC_User>();
 
         static DataManager()
         {
@@ -23,26 +24,26 @@ namespace MyPCRoom
             try
             {
                 DBHelper.selectQuery();
-                Cars.Clear();
+                Users.Clear();
                 foreach (DataRow item in DBHelper.dt.Rows)
                 {
-                    PC_User car = new PC_User();
-                    // car.carNumber = item[" MS SQL 의 필드명이랑 같아야함  "].ToString();
+                    PC_User user = new PC_User();
+                    // user.userNumber = item[" MS SQL 의 필드명이랑 같아야함  "].ToString();
 
-                    car.User_id = item["User_id"].ToString();
-                    car.Name = item["Name"].ToString();
-                    car.Using_status = item["Using_status"].ToString();
+                    user.User_id = item["User_id"].ToString();
+                    user.Name = item["Name"].ToString();
+                    user.Using_status = item["Using_status"].ToString();
                     
-                    car.Start_time = item["Start_time"].ToString() == "" ?
+                    user.Start_time = item["Start_time"].ToString() == "" ?
                        new DateTime() :
                        DateTime.Parse(item["Start_time"].ToString());
 
-                    car.Use_time = item["Use_time"].ToString();
-                    car.Late_time = item["Late_time"].ToString();
-                    car.Seat_num = item["Seat_num"].ToString();
+                    user.Use_time = item["Use_time"].ToString();
+                    user.Late_time = item["Late_time"].ToString();
+                    user.Seat_num = item["Seat_num"].ToString();
                    
 
-                    Cars.Add(car);
+                    Users.Add(user);
                 }
 
             }
@@ -51,11 +52,71 @@ namespace MyPCRoom
                 System.Windows.Forms.MessageBox.Show(e.Message + "load");
                 //pringLog(e.StackTrace + "load");
             }
+
+
+            //SortedUsers = Users.OrderBy(x => int.Parse(x.User_id)).ToList();
+
+
+
         }
 
+        //회원 삭제 코드 form2
+        public static void delete(string user_id)
+        {
+            try
+            {
+                DBHelper.userDeleteQuery(user_id);
+            }
+            catch (Exception e)
+            {
+                System.Windows.Forms.MessageBox.Show(e.Message + "DataManager.delete error");
+            }
+        }
 
+        //form4
+        public static void search(string user_id)
+        {
+            try
+            {
+                Users.Clear();
+                DBHelper.searchQuery(user_id);
+                foreach (DataRow item in DBHelper.dt.Rows)
+                {
+                    PC_User user = new PC_User();
+                    // user.userNumber = item[" MS SQL 의 필드명이랑 같아야함  "].ToString();
 
+                    user.User_id = item["User_id"].ToString();
+                    user.Name = item["Name"].ToString();
+                    user.Using_status = item["Using_status"].ToString();
 
+                    user.Start_time = item["Start_time"].ToString() == "" ?
+                       new DateTime() :
+                       DateTime.Parse(item["Start_time"].ToString());
+
+                    user.Use_time = item["Use_time"].ToString();
+                    user.Late_time = item["Late_time"].ToString();
+                    user.Seat_num = item["Seat_num"].ToString();
+
+                    Users.Add(user);
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.Forms.MessageBox.Show(e.Message + "DataManager.search error");
+            }
+        }
+
+        public static void save_and_quite(string late_time, string seat_num)
+        {
+            try
+            {
+                DBHelper.db_save_quite(late_time, seat_num);
+            }
+            catch (Exception e)
+            {
+                System.Windows.Forms.MessageBox.Show(e.Message + "DataManager.save_and_quite error");
+            }
+        }
 
 
     }

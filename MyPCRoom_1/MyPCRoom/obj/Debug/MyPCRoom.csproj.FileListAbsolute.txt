@@ -51,3 +51,38 @@ C:\Users\Seojun\Desktop\MyPCRoom_1\MyPCRoom\obj\Debug\MyPCRoom.csproj.GenerateRe
 C:\Users\Seojun\Desktop\MyPCRoom_1\MyPCRoom\obj\Debug\MyPCRoom.csproj.CoreCompileInputs.cache
 C:\Users\Seojun\Desktop\MyPCRoom_1\MyPCRoom\obj\Debug\MyPCRoom.exe
 C:\Users\Seojun\Desktop\MyPCRoom_1\MyPCRoom\obj\Debug\MyPCRoom.pdb
+C:\Users\Seojun\Desktop\MyPCRoom_1\MyPCRoom\obj\Debug\MyPCRoom.Form5.resources
+C:\Users\aa\Desktop\MyPCRoom_1\MyPCRoom\bin\Debug\MyPCRoom.exe.config
+C:\Users\aa\Desktop\MyPCRoom_1\MyPCRoom\bin\Debug\MyPCRoom.exe
+C:\Users\aa\Desktop\MyPCRoom_1\MyPCRoom\bin\Debug\MyPCRoom.pdb
+C:\Users\aa\Desktop\MyPCRoom_1\MyPCRoom\obj\Debug\MyPCRoom.csproj.AssemblyReference.cache
+C:\Users\aa\Desktop\MyPCRoom_1\MyPCRoom\obj\Debug\MyPCRoom.csproj.SuggestedBindingRedirects.cache
+C:\Users\aa\Desktop\MyPCRoom_1\MyPCRoom\obj\Debug\MyPCRoom.Main.resources
+C:\Users\aa\Desktop\MyPCRoom_1\MyPCRoom\obj\Debug\MyPCRoom.Form2.resources
+C:\Users\aa\Desktop\MyPCRoom_1\MyPCRoom\obj\Debug\MyPCRoom.Form3.resources
+C:\Users\aa\Desktop\MyPCRoom_1\MyPCRoom\obj\Debug\MyPCRoom.Form4.resources
+C:\Users\aa\Desktop\MyPCRoom_1\MyPCRoom\obj\Debug\MyPCRoom.Form5.resources
+C:\Users\aa\Desktop\MyPCRoom_1\MyPCRoom\obj\Debug\MyPCRoom.Properties.Resources.resources
+C:\Users\aa\Desktop\MyPCRoom_1\MyPCRoom\obj\Debug\MyPCRoom.csproj.GenerateResource.cache
+C:\Users\aa\Desktop\MyPCRoom_1\MyPCRoom\obj\Debug\MyPCRoom.csproj.CoreCompileInputs.cache
+C:\Users\aa\Desktop\MyPCRoom_1\MyPCRoom\obj\Debug\MyPCRoom.exe
+C:\Users\aa\Desktop\MyPCRoom_1\MyPCRoom\obj\Debug\MyPCRoom.pdb
+\\192.168.0.111\shareFolder\하사안서준\중사 안서준\MyPCRoom_1\MyPCRoom\obj\Debug\MyPCRoom.csproj.AssemblyReference.cache
+\\192.168.0.111\shareFolder\하사안서준\중사 안서준\MyPCRoom_1\MyPCRoom\obj\Debug\MyPCRoom.csproj.SuggestedBindingRedirects.cache
+\\192.168.0.111\shareFolder\하사안서준\중사 안서준\MyPCRoom_1\MyPCRoom\obj\Debug\MyPCRoom.exe
+\\192.168.0.111\shareFolder\하사안서준\중사 안서준\MyPCRoom_1\MyPCRoom\obj\Debug\MyPCRoom.pdb
+C:\Users\Seojun\Desktop\새 폴더\MyPCRoom_1\MyPCRoom\bin\Debug\MyPCRoom.exe.config
+C:\Users\Seojun\Desktop\새 폴더\MyPCRoom_1\MyPCRoom\bin\Debug\MyPCRoom.exe
+C:\Users\Seojun\Desktop\새 폴더\MyPCRoom_1\MyPCRoom\bin\Debug\MyPCRoom.pdb
+C:\Users\Seojun\Desktop\새 폴더\MyPCRoom_1\MyPCRoom\obj\Debug\MyPCRoom.csproj.AssemblyReference.cache
+C:\Users\Seojun\Desktop\새 폴더\MyPCRoom_1\MyPCRoom\obj\Debug\MyPCRoom.csproj.SuggestedBindingRedirects.cache
+C:\Users\Seojun\Desktop\새 폴더\MyPCRoom_1\MyPCRoom\obj\Debug\MyPCRoom.Main.resources
+C:\Users\Seojun\Desktop\새 폴더\MyPCRoom_1\MyPCRoom\obj\Debug\MyPCRoom.Form2.resources
+C:\Users\Seojun\Desktop\새 폴더\MyPCRoom_1\MyPCRoom\obj\Debug\MyPCRoom.Form3.resources
+C:\Users\Seojun\Desktop\새 폴더\MyPCRoom_1\MyPCRoom\obj\Debug\MyPCRoom.Form4.resources
+C:\Users\Seojun\Desktop\새 폴더\MyPCRoom_1\MyPCRoom\obj\Debug\MyPCRoom.Form5.resources
+C:\Users\Seojun\Desktop\새 폴더\MyPCRoom_1\MyPCRoom\obj\Debug\MyPCRoom.Properties.Resources.resources
+C:\Users\Seojun\Desktop\새 폴더\MyPCRoom_1\MyPCRoom\obj\Debug\MyPCRoom.csproj.GenerateResource.cache
+C:\Users\Seojun\Desktop\새 폴더\MyPCRoom_1\MyPCRoom\obj\Debug\MyPCRoom.csproj.CoreCompileInputs.cache
+C:\Users\Seojun\Desktop\새 폴더\MyPCRoom_1\MyPCRoom\obj\Debug\MyPCRoom.exe
+C:\Users\Seojun\Desktop\새 폴더\MyPCRoom_1\MyPCRoom\obj\Debug\MyPCRoom.pdb
