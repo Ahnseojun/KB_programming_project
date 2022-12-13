@@ -136,7 +136,6 @@ namespace MyPCRoom
             if (status == "ON")
             {
 
-
                 try
                 {
                     sqlcommand = "update PCRoom set Seat_num=@p3, Late_time = @p4, Using_Status ='ON' where user_id=@p6";
@@ -249,7 +248,6 @@ namespace MyPCRoom
             finally
             {
                 conn.Close();
-                System.Windows.Forms.MessageBox.Show("실해으");
             }
         }
 
