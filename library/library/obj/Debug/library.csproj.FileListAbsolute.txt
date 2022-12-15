@@ -1,0 +1,13 @@
+C:\Users\Seojun\Desktop\VS\C_Sharp\library\library\bin\Debug\library.exe.config
+C:\Users\Seojun\Desktop\VS\C_Sharp\library\library\bin\Debug\library.exe
+C:\Users\Seojun\Desktop\VS\C_Sharp\library\library\bin\Debug\library.pdb
+C:\Users\Seojun\Desktop\VS\C_Sharp\library\library\obj\Debug\library.csproj.AssemblyReference.cache
+C:\Users\Seojun\Desktop\VS\C_Sharp\library\library\obj\Debug\library.csproj.SuggestedBindingRedirects.cache
+C:\Users\Seojun\Desktop\VS\C_Sharp\library\library\obj\Debug\library.Form1.resources
+C:\Users\Seojun\Desktop\VS\C_Sharp\library\library\obj\Debug\library.Properties.Resources.resources
+C:\Users\Seojun\Desktop\VS\C_Sharp\library\library\obj\Debug\library.csproj.GenerateResource.cache
+C:\Users\Seojun\Desktop\VS\C_Sharp\library\library\obj\Debug\library.csproj.CoreCompileInputs.cache
+C:\Users\Seojun\Desktop\VS\C_Sharp\library\library\obj\Debug\library.exe
+C:\Users\Seojun\Desktop\VS\C_Sharp\library\library\obj\Debug\library.pdb
+C:\Users\Seojun\Desktop\VS\C_Sharp\library\library\obj\Debug\library.Form2.resources
+C:\Users\Seojun\Desktop\VS\C_Sharp\library\library\obj\Debug\library.Form3.resources
